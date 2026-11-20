@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover — GTA 6-style cover art maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>VICE COVER</h1>
+  <p class="sub">Make GTA 6-style cover art. Four panels, five grades, one sunset.</p>
+</header>
+
+<main class="editor">
+  <section class="stage" aria-label="Cover preview">
+    <canvas id="cover" width="1080" height="1080"></canvas>
+    <p class="hint">Click a panel to select it. Drag to pan its photo, scroll to zoom.</p>
+  </section>
+
+  <aside class="controls" aria-label="Cover controls">
+    <section class="group">
+      <h2>Layout</h2>
+      <div class="buttons" id="layout-bar" role="group" aria-label="Cover layout">
+        <button type="button" data-layout="poster" title="Poster layout (key 1)" aria-label="Poster layout" aria-pressed="true">Poster</button>
+        <button type="button" data-layout="triptych" title="Triptych layout (key 2)" aria-label="Triptych layout" aria-pressed="false">Triptych</button>
+        <button type="button" data-layout="grid" title="Grid 2 by 2 layout (key 3)" aria-label="Grid 2 by 2 layout" aria-pressed="false">Grid 2&times;2</button>
+        <button type="button" data-layout="single" title="Single panel layout (key 4)" aria-label="Single panel layout" aria-pressed="false">Single</button>
+        <button type="button" data-layout="strip" title="Strip filmstrip layout (key 5)" aria-label="Strip filmstrip layout" aria-pressed="false">Strip</button>
+      </div>
+    </section>
+
+    <section class="group">
+      <h2>Grade</h2>
+      <div class="buttons" id="grade-bar" role="group" aria-label="Colour grade">
+        <button type="button" data-grade="sunset" title="Sunset grade" aria-label="Sunset grade" aria-pressed="true">Sunset</button>
+        <button type="button" data-grade="neon" title="Neon grade" aria-label="Neon grade" aria-pressed="false">Neon</button>
+        <button type="button" data-grade="dusk" title="Dusk grade" aria-label="Dusk grade" aria-pressed="false">Dusk</button>
+        <button type="button" data-grade="vice" title="Vice grade" aria-label="Vice grade" aria-pressed="false">Vice</button>
+        <button type="button" data-grade="noir" title="Noir grade" aria-label="Noir grade" aria-pressed="false">Noir</button>
+      </div>
+    </section>
+
+    <section class="group" id="caption-group">
+      <h2>Caption</h2>
+      <label class="field">Caption
+        <input id="caption" type="text" value="SUNSET HEIST" maxlength="24" aria-label="Cover caption">
+      </label>
+      <label class="field">Tagline
+        <input id="tagline" type="text" value="EVERY SCORE HAS A SUNSET." maxlength="60" aria-label="Cover tagline">
+      </label>
+    </section>
+
+    <section class="group" id="panels-group">
+      <h2>Panels</h2>
+      <div id="panels"></div>
+      <button type="button" id="load-samples" class="secondary">Load sample photos</button>
+    </section>
+
+    <section class="group">
+      <h2>Export</h2>
+      <div class="export-row">
+        <label class="field">Format
+          <select id="format" aria-label="Export format">
+            <option value="png" selected>PNG</option>
+            <option value="jpeg">JPEG</option>
+          </select>
+        </label>
+        <button type="button" id="shuffle" class="shuffle" title="Shuffle layout, grade, crops and labels (key R)">Shuffle</button>
+        <button type="button" id="export-all" class="primary" title="Export all four post sizes (key E)">Export all</button>
+      </div>
+      <p class="keys">
+        <kbd>1</kbd>–<kbd>5</kbd> layout &nbsp; <kbd>G</kbd> grade &nbsp; <kbd>R</kbd> shuffle &nbsp; <kbd>E</kbd> export
+      </p>
+    </section>
+  </aside>
+</main>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+/* Vice Cover — editor styles. Dark theme, no external assets. */
+
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #0d0718;
+  --panel: #1a1030;
+  --panel-2: #241640;
+  --ink: #f4ead9;
+  --ink-dim: #b8a8cc;
+  --line: #3a2560;
+  --accent: #ff9a5a;
+  --accent-2: #ff5e62;
+  --chip: #2a1b4d;
+}
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.45;
+}
+
+.top { padding: 20px 24px 8px; }
+.top h1 {
+  margin: 0;
+  font-family: "Arial Narrow", Impact, sans-serif;
+  font-size: 44px;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, #ffb347, #ff5e62);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.top .sub { margin: 4px 0 0; color: var(--ink-dim); }
+
+.editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 20px;
+  padding: 12px 24px 32px;
+  align-items: start;
+}
+
+.stage canvas {
+  width: min(100%, 640px);
+  height: auto;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #000;
+  cursor: crosshair;
+}
+.hint { color: var(--ink-dim); font-size: 13px; }
+
+.controls { display: flex; flex-direction: column; gap: 18px; }
+.group {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+}
+.group h2 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--ink-dim);
+}
+
+.buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+button, select, input[type="text"] {
+  font: inherit;
+  color: var(--ink);
+}
+button {
+  background: var(--chip);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+button.on {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #160a24;
+  border-color: transparent;
+  font-weight: 700;
+}
+button.primary {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #160a24;
+  font-weight: 700;
+  border-color: transparent;
+}
+button.secondary { width: 100%; margin-top: 10px; }
+button.shuffle {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.field { display: block; font-size: 13px; color: var(--ink-dim); }
+.field + .field { margin-top: 10px; }
+.field input[type="text"], .field select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.export-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 8px;
+  align-items: end;
+}
+
+#panels { display: flex; flex-direction: column; gap: 10px; }
+.panel-row {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 6px 8px;
+  align-items: center;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+}
+.panel-row.active { border-color: var(--accent); }
+.panel-name { font-weight: 700; font-size: 13px; }
+.panel-row .label {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 8px;
+  text-transform: uppercase;
+}
+.panel-row .zoom { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); }
+.panel-row .upload {
+  grid-column: 1 / -1;
+  display: inline-block;
+  text-align: center;
+  background: var(--chip);
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.panel-row .upload input[type="file"] { display: none; }
+.panel-row .reset {
+  grid-column: 1 / -1;
+  justify-self: end;
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
+.keys { color: var(--ink-dim); font-size: 13px; margin: 10px 0 0; }
+.keys kbd, kbd {
+  display: inline-block;
+  min-width: 22px;
+  text-align: center;
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--panel-2);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 12px;
+}
+
+/* Cover mode: the canvas fills the viewport, the chrome hides. */
+body.cover-mode { overflow: hidden; }
+body.cover-mode .top,
+body.cover-mode .controls,
+body.cover-mode .hint { display: none; }
+body.cover-mode .editor { display: block; padding: 0; }
+body.cover-mode .stage canvas {
+  width: 100vw;
+  height: 100vh;
+  border: 0;
+  border-radius: 0;
+}
+
+/* Narrow screens: the controls stack under the canvas. */
+@media (max-width: 860px) {
+  .editor { grid-template-columns: 1fr; }
+  .top h1 { font-size: 34px; }
+  .export-row { grid-template-columns: 1fr; }
+}
